@@ -1,0 +1,11 @@
+.shopping-cart {
+    min-width: 450px;
+  }
+  .image-width {
+    width: 90px;
+  }
+
+  .btn{
+    padding: .8rem .5em;
+    border-radius: .8rem;
+  }
