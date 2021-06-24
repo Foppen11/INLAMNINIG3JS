@@ -1,5 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
 import CartProduct from './CartProduct';
 
 const ShoppingCart = () => {
@@ -34,7 +36,7 @@ const ShoppingCart = () => {
           </div>
           <small className="text-muted">ink. vat</small>
         </div>
-        <button className="btn btn-info">Checkout</button>
+        <NavLink to="/checkout" className="btn btn-info" >Checkout</NavLink>
       </div>
 
     </div>

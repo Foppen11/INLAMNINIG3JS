@@ -39,7 +39,7 @@ const Navbar = () => {
               <NavLink exact className="nav-link" aria-current="page" to="/products">Products</NavLink>
             </li>
             {
-              adminOnline && userOnline
+              userOnline && !adminOnline
               ? <li className="nav-item"><NavLink exact className="nav-link" aria-current="page" to={`/order/${userEmail}`}>Orders</NavLink></li>
               : <p></p>
             }

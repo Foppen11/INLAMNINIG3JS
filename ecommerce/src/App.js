@@ -1,4 +1,6 @@
 import './App.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './components/navigation/Navbar';
 import Home from './views/Home';
@@ -9,8 +11,24 @@ import Orders from './views/Orders'
 import OrdersEmail from './views/OrdersEmail'
 import Login from './views/Login'
 import Users from './views/Users';
+import { checkUser } from './store/actions/authActions';
+import { getUsers } from './store/actions/usersActions';
+import CheckOut from './views/CheckOut';
+
 
 function App() {
+
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(checkUser())
+    dispatch(getUsers())
+  }, [dispatch])
+
+  const user = useSelector(state => state.auth.userToken)
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -25,6 +43,8 @@ function App() {
 
           <Route exact path="/order" component={Orders} />
           <Route exact path="/order/:email" component={OrdersEmail} />
+
+          <Route exact path="/checkout" component={CheckOut} />
 
           <Route path="*" component={NotFound} />
         </Switch>

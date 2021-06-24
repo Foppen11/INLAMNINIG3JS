@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrdersCatalog } from '../store/actions/orderCatalogActions';
-import OrderCard from '../components/orders/OrderCard';
+import AdminOrderCard from '../components/orders/AdminOrderCard';
 
 const Orders = () => {
     
@@ -12,11 +12,13 @@ const Orders = () => {
         dispatch(getOrdersCatalog());
     }, [dispatch])
     
+
+
     return (
-        <div className="">
+        <div>
         {
           orderCatalog && orderCatalog.map(order => (
-            <OrderCard key={order._id} order={order} />
+            <AdminOrderCard key={order._id} order={order} />
               ))
         }
         </div>

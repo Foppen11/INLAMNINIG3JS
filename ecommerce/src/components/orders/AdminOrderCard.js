@@ -31,7 +31,11 @@ const OrderCard = ({order}) => {
                 ? <h4> Order status: Completed </h4>
                 : <h4> Order status: Unfinished </h4>
               }
-              
+              {
+                !order.completed
+                ? <button className="btn btn-info btn-block">SEND</button>
+                : <button className="btn btn-danger btn-block">CALL BACK</button>
+              }
 
             </div>
           </div>

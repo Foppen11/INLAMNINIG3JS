@@ -42,8 +42,8 @@ const authReducer = (state = initState, action) => {
       }
 
     case actiontypes().auth.logout:
-      state.online = false
       localStorage.removeItem('token')
+      state.online = false
       return {
         ...initState
       }

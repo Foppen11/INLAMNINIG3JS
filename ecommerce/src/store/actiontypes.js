@@ -18,7 +18,9 @@ const actiontypes = () => {
       },
       order: {
         set:      'ORDER_SET',
-        clear:    'ORDER_CLEAR'
+        add:      'ORDER_ADD',
+        clear:    'ORDER_CLEAR',
+        loading:  'ORDER_LOADING'
       },
       auth: {
         loading: 'AUTH_LOADING',

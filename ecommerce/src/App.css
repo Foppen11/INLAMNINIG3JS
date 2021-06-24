@@ -9,3 +9,15 @@
     padding: .8rem .5em;
     border-radius: .8rem;
   }
+
+  .min-width{
+    min-width: 300px;
+  }
+  
+  .btn-checkout{
+    padding: 1rem;
+  }
+
+  .btn-block+.btn-block{
+    margin-top: 0;
+  }
