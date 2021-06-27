@@ -21,3 +21,7 @@
   .btn-block+.btn-block{
     margin-top: 0;
   }
+
+  .bg-completed{
+    background: rgb(0, 255, 106);
+  }

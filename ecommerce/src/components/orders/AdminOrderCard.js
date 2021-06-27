@@ -1,12 +1,22 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { update } from '../../store/actions/orderActions';
 
 const OrderCard = ({order}) => {
 
-    const list = order.list
+  let history = useHistory()
+  const dispatch = useDispatch();
+  const list = order.list
+
+  const updateOrder = () => {
+    dispatch(update(order._id, order))
+    history.push('/order')
+  }
     
 
   return (
-    <div className="card mb-5">
+    <div className={`card mb-5 ${order.completed ? "bg-completed" : ""}`}>
       <div className="card-header d-flex justify-content-between">
         <h4> Order number: {order._id} </h4>
         <h4> Order placed by: <span className="">{order.email}</span> </h4>
@@ -15,7 +25,7 @@ const OrderCard = ({order}) => {
         <blockquote className="blockquote mb-0">
           {
             list && list.map(product => (
-              <div className="d-flex p-2 justify-content-between mb-2">
+              <div key={product._id} className="d-flex p-2 justify-content-between mb-2">
                   <h2 className="min-width"> {product.name} </h2>
                   <h3> amount: {product.quantity} </h3>
                   <h2 className="min-width"> price each: {product.price}SEK </h2>
@@ -33,8 +43,8 @@ const OrderCard = ({order}) => {
               }
               {
                 !order.completed
-                ? <button className="btn btn-info btn-block">SEND</button>
-                : <button className="btn btn-danger btn-block">CALL BACK</button>
+                ? <button className="btn btn-info btn-block" onClick={updateOrder}>SEND</button>
+                : <button className="btn btn-danger btn-block" onClick={updateOrder}>CALL BACK</button>
               }
 
             </div>

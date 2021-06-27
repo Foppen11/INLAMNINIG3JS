@@ -19,6 +19,7 @@ const actiontypes = () => {
       order: {
         set:      'ORDER_SET',
         add:      'ORDER_ADD',
+        update:   'ORDER_UPDATE',
         clear:    'ORDER_CLEAR',
         loading:  'ORDER_LOADING'
       },
@@ -26,7 +27,9 @@ const actiontypes = () => {
         loading: 'AUTH_LOADING',
         success: 'AUTH_SUCCESS',
         failure: 'AUTH_FAILURE',
-        logout:  'AUTH_LOGOUT'
+        logout:  'AUTH_LOGOUT',
+        update:  'AUTH_UPDATE',
+        deleteOne:'AUTH_DELETE'
       },
       users: {
         getUsers: 'USERS_GET',
@@ -38,9 +41,7 @@ const actiontypes = () => {
         getUser:  'USER_GET',
         loading:  'USER_LOADING',
         success:  'USER_SUCCESS',
-        failure:  'USER_FAILURE',
-        update:   'USER_UPDATE',
-        delete:   'USER_DELETE'
+        failure:  'USER_FAILURE'
       }
     }
   }

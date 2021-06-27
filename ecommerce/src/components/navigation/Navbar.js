@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom'; 
+import { Link, NavLink, useHistory } from 'react-router-dom'; 
 import ShoppingCart from '../shoppingCart/ShoppingCart';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/actions/authActions';
@@ -11,11 +11,13 @@ const Navbar = () => {
   const userOnline = useSelector(state => state.auth.online)
   const adminOnline = useSelector(state => state.auth.admin)
   const userEmail = useSelector(state => state.auth.userEmail)
+  let history = useHistory()
 
-  const userLogout = (e) => {
-    e.preventDefault();
 
+  const userLogout = () => {
     dispatch(logout())
+    history.go(0)
+
   }
   
   return (

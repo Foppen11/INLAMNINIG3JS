@@ -31,6 +31,12 @@ const orderReducer = (state = initState, action) => {
         price: action.payload.price
       }
 
+    case actiontypes().order.update:
+      return{
+        ...state,
+        completed: action.payload
+      }
+
     case actiontypes().order.clear:
       return {
         ...state,

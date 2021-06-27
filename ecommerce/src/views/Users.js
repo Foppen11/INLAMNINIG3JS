@@ -5,7 +5,7 @@ import UserCard from '../components/users/UserCard';
 
 const Users = () => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
+    const users = useSelector(state => state.users.list);
     
     useEffect(() => {
         dispatch(getUsers());
@@ -14,7 +14,7 @@ const Users = () => {
     return (
         <div>
         {
-          user && user.map(user => (
+          users && users.map(user => (
             <UserCard key={user._id} user={user} />
               ))
         }

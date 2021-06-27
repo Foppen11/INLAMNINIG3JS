@@ -6,7 +6,7 @@ const OrderCard = ({order}) => {
     
 
   return (
-    <div className="card mb-5">
+    <div className={`card mb-5 ${order.completed ? "bg-completed" : ""}`}>
       <div className="card-header d-flex justify-content-between">
         <h4> Order number: {order._id} </h4>
         <h4> Order placed by: <span className="">{order.email}</span> </h4>
@@ -15,7 +15,7 @@ const OrderCard = ({order}) => {
         <blockquote className="blockquote mb-0">
           {
             list && list.map(product => (
-              <div className="d-flex p-2 justify-content-between mb-2">
+              <div key={product._id} className="d-flex p-2 justify-content-between mb-2">
                   <h2 className="min-width"> {product.name} </h2>
                   <h3> amount: {product.quantity} </h3>
                   <h2 className="min-width"> price each: {product.price}SEK </h2>

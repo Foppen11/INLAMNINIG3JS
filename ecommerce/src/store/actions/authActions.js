@@ -12,6 +12,7 @@ const apiCall = (url, data, dispatch) => {
   })
 }
 
+
 export const login = user => {
   return dispatch => {
     dispatch(loading())
@@ -23,6 +24,37 @@ export const register = (user) => {
   return dispatch => {
     dispatch(loading())
     apiCall('http://localhost:9999/api/users/register', user, dispatch)
+  }
+}
+
+export const update = (id, user) => {
+  return dispatch => {
+    dispatch(loading())
+    user.admin = !user.admin
+    axios.patch(`http://localhost:9999/api/users/update/${id}`, user)
+    dispatch(updateUser(user))
+  }
+}
+
+export const deleteOneUser = (id) => {
+  return dispatch => {
+    dispatch(loading())
+    axios.delete(`http://localhost:9999/api/users/delete/${id}`)
+    dispatch(deleteUser())
+  }
+}
+
+export const updateUser = (user) => {
+  return {
+    type: actiontypes().auth.update,
+    payload: user
+  }
+}
+
+export const deleteUser = () => {
+  console.log()
+  return{
+    type: actiontypes().auth.deleteOne
   }
 }
 

@@ -14,7 +14,10 @@ import Users from './views/Users';
 import { checkUser } from './store/actions/authActions';
 import { getUsers } from './store/actions/usersActions';
 import CheckOut from './views/CheckOut';
-
+import Thanks from './views/Thanks';
+import Restricted from './views/Restricted';
+import { AdminRoute } from './routes/AdminRoute';
+import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
 
@@ -27,7 +30,6 @@ function App() {
     dispatch(getUsers())
   }, [dispatch])
 
-  const user = useSelector(state => state.auth.userToken)
 
   return (
     <BrowserRouter>
@@ -39,13 +41,12 @@ function App() {
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/:id" component={ProductDetails} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/users" component={Users} />
-
-          <Route exact path="/order" component={Orders} />
-          <Route exact path="/order/:email" component={OrdersEmail} />
-
+          <AdminRoute exact path="/users" component={Users} />
+          <Route exact path="/thanks" component={Thanks} />
+          <Route exact path="/restricted" component={Restricted} />
+          <AdminRoute exact path="/order" component={Orders} />
+          <ProtectedRoute exact path="/order/:email" component={OrdersEmail} />
           <Route exact path="/checkout" component={CheckOut} />
-
           <Route path="*" component={NotFound} />
         </Switch>
       </div>

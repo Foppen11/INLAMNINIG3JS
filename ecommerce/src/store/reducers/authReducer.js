@@ -41,6 +41,17 @@ const authReducer = (state = initState, action) => {
         error: action.payload
       }
 
+    case actiontypes().auth.update:
+      return{
+        ...state,
+        admin: action.payload
+      }
+
+    case actiontypes().auth.deleteOne:
+      return{
+        ...state
+      }
+
     case actiontypes().auth.logout:
       localStorage.removeItem('token')
       state.online = false

@@ -1,12 +1,6 @@
 import actiontypes from "../actiontypes";
 import axios from 'axios';
 
-const apiCall = (url, list, email, price, dispatch) => {
-  axios.post(url, {list, email, price})
-  .then(() => {
-    dispatch(add(list, email, price))
-  })
-}
 
 export const addOrder = ({shoppingCart, user, totalCartAmount}) => {
     return dispatch => {
@@ -14,9 +8,22 @@ export const addOrder = ({shoppingCart, user, totalCartAmount}) => {
         let email = user
         let price = totalCartAmount
       dispatch(loading())
-      apiCall('http://localhost:9999/api/order/new', list, email, price, dispatch)
+      axios.post('http://localhost:9999/api/order/new', {list, email, price})
+      .then(() => {
+        dispatch(add(list, email, price))
+      })
     }
   }
+
+export const update = (id, order) => {
+  return dispatch => {
+    dispatch(loading())
+    order.completed = !order.completed
+    axios.patch(`http://localhost:9999/api/order/update/${id}`, order)
+    dispatch(updateOrder(order))
+    
+  }
+}
 
 
   export const loading = () => {
@@ -31,4 +38,11 @@ export const addOrder = ({shoppingCart, user, totalCartAmount}) => {
           type: actiontypes().order.add,
           payload: {list, email, price}
       }
+  }
+
+  export const updateOrder = (order) => {
+    return {
+      type: actiontypes().auth.update,
+      payload: order
+    }
   }

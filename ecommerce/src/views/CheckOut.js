@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import CheckOutCart from '../components/checkout/CheckOutCart';
 import { clearCart } from '../store/actions/cartActions';
 import { useDispatch } from 'react-redux';
@@ -15,8 +15,10 @@ const CheckOut = () => {
     const userOnline = useSelector(state => state.auth.online)
     const user = useSelector(state => state.auth.userEmail)
     const dispatch = useDispatch();
+    const history = useHistory();
 
-  
+    
+
     const clear = e => {
         e.stopPropagation()
         dispatch(clearCart())
@@ -26,6 +28,7 @@ const CheckOut = () => {
         e.preventDefault()
         dispatch(addOrder({shoppingCart, user, totalCartAmount}))
         dispatch(clearCart())
+        history.push('/thanks')
     }
   
     const empty = (
@@ -33,9 +36,12 @@ const CheckOut = () => {
         Your cart is empty
       </div>
     )
-
+    
     return (
         <div className="bg-light">
+            {
+            !shoppingCart.length && empty
+            }
             {
                 shoppingCart.map(product => (
                     <CheckOutCart product={product} key={product._id} />
@@ -51,12 +57,16 @@ const CheckOut = () => {
                     !userOnline
                     ? <Link className="btn-checkout btn-info btn-block text-center" to="/login" >Logg in to checkout</Link>
                     : <p></p>
-                    
+                }
+                {
+                    shoppingCart.length < 1
+                    ? <Link className="btn-checkout btn-info btn-block text-center" to="/products" >Add products to check out</Link>
+                    : <p></p>
                 }
                 {
                     userOnline && shoppingCart.length
                     ? <button className="btn-checkout btn-info btn-block text-center" onClick={add}>Buy items in cart</button>
-                    : <Link className="btn-checkout btn-info btn-block text-center" to="/products" >Add products to check out</Link>
+                    : <p></p>
                 }
                 {
                     shoppingCart.length > 0
@@ -66,9 +76,6 @@ const CheckOut = () => {
             </div>
 
 
-            {
-            !shoppingCart.length && empty
-            }
         </div>
 
     )

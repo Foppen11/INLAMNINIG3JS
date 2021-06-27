@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 const NotFound = (props) => {
 
   let history = useHistory()
-  console.log(history)
   setTimeout(() => {
     props.history.replace('/')
     // history.push('/')
